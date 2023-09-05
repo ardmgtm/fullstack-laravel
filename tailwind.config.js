@@ -15,6 +15,10 @@ export default {
             fontFamily: {
                 sans: ['Nunito Sans', ...defaultTheme.fontFamily.sans],
             },
+            gridTemplateColumns: {
+                "sidebar": "256px auto", //for sidebar layout
+                "sidebar-collapsed": "48px auto", //for collapsed sidebar layout
+            },
         },
         colors:{
             'white':"#ffffff",
@@ -48,5 +52,13 @@ export default {
         }
     },
 
+    safelist: [
+        {
+            pattern: /w-(20|60)/
+        },
+        {
+            pattern: /pl-(20|60)/
+        },
+    ],
     plugins: [forms],
 };
