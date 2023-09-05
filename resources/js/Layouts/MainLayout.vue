@@ -1,10 +1,3 @@
-<script setup>
-import { ref } from 'vue';
-import BsIcon from '@/Components/BsIcon.vue';
-import LayoutSidebar from './Components/LayoutSidebar.vue';
-
-const collapsed = ref(false);
-</script>
 <template>
     <div class="flex">
         <div class="top-0 fixed min-w-full z-50">
@@ -67,3 +60,11 @@ const collapsed = ref(false);
         </div>
     </div>
 </template>
+
+<script setup>
+import { ref } from 'vue';
+import BsIcon from '@/Components/BsIcon.vue';
+import LayoutSidebar from './Components/LayoutSidebar.vue';
+
+const collapsed = ref(false);
+</script>

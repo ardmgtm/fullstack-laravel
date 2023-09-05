@@ -1,10 +1,3 @@
-<script setup>
-import { ref } from 'vue';
-
-const prop = defineProps({
-    collapsed: Boolean,
-})
-</script>
 <template>
     <div class="p-4 fixed max-h-screen mt-20 overflow-scroll w-20 no-scrollbar transition-[width] duration-300 ease-in-out"
         :class="[
@@ -20,3 +13,11 @@ const prop = defineProps({
         </div> -->
     </div>
 </template>
+
+<script setup>
+import { ref } from 'vue';
+
+const prop = defineProps({
+    collapsed: Boolean,
+})
+</script>

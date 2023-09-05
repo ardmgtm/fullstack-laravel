@@ -1,5 +1,20 @@
+<template>
+    <button 
+        class="px-3 py-2 text-[12px] rounded-lg font-bold m-1" 
+        :class="style"
+    >
+        <div class="flex items-center">
+            <div class="pr-2" v-if="icon != null">
+                <bs-icon :icon="icon"></bs-icon>
+            </div>
+            <div class="h-5">
+                <slot/>
+            </div>
+        </div>
+    </button>
+</template>
+
 <script setup>
-import { ElButton } from 'element-plus';
 import { ref, onMounted } from "vue";
 import BsIcon from "@/Components/BsIcon.vue";
 
@@ -94,19 +109,3 @@ switch(props.type){
         break;
 }
 </script>
-<template>
-    <el-button 
-        v-bind="$props" 
-        class="px-3 py-2 text-[12px] rounded-lg font-bold m-1" 
-        :class="style"
-    >
-        <div class="flex items-center">
-            <div class="pr-2" v-if="icon != null">
-                <bs-icon :icon="icon"></bs-icon>
-            </div>
-            <div class="h-5">
-                <slot/>
-            </div>
-        </div>
-    </el-button>
-</template>
