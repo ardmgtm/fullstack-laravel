@@ -10,24 +10,25 @@
         Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin dictum laoreet tempus. Nunc orci nisl, varius a ultrices at, placerat et est. Suspendisse interdum feugiat risus, id iaculis neque sodales eu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed quam orci, efficitur id imperdiet in, commodo pretium ligula. Donec ultricies elit sed bibendum pharetra. Donec ut dolor fringilla, sollicitudin odio id, sollicitudin purus.
 
         Integer tristique nec magna vitae auctor. Proin vitae felis finibus justo varius tempor vitae sit amet neque. Nulla aliquet eu turpis ac pretium. Nulla tempus sagittis sapien, ac gravida nunc tincidunt ut. Sed quam quam, laoreet quis facilisis eu, porttitor ut risus. Nam quis ornare diam, aliquam aliquam ipsum. Quisque tristique tellus urna, feugiat dapibus ipsum faucibus eu. Maecenas metus ex, varius vel risus et, sollicitudin hendrerit quam. In tincidunt, odio ac venenatis bibendum, tortor nulla efficitur tortor, in mattis urna neque sed urna. Integer fringilla urna orci, ut porttitor eros ullamcorper ut. Mauris facilisis elit vitae venenatis mollis. Suspendisse dignissim ligula sed libero sodales scelerisque. Nunc pretium est diam, sed egestas ex sagittis vitae.
+
+        <div class="container mx-auto bg-white rounded-xl p-6">
+            <div class="inline-flex">
+                <bs-button icon="cloud-arrow-down" type="primary">Download</bs-button>
+                <bs-button icon="cloud-arrow-up" type="primary-outline">Upload</bs-button>
+                <bs-button type="secondary">Download</bs-button>
+                <bs-button type="secondary-outline">Download</bs-button>
+                <bs-button icon="trash" type="danger">Delete</bs-button>
+                <bs-button icon="trash" type="danger-outline">Delete</bs-button>
+            </div>
+            <div class="flex mt-8">
+                <bs-input />
+            </div>
+        </div>
     </main-layout>
-    <!-- <div class="container mx-auto bg-white rounded-xl p-6">
-        <div class="inline-flex">
-            <bs-button icon="cloud-arrow-down" type="primary">Download</bs-button>
-            <bs-button icon="cloud-arrow-up" type="primary-outline">Upload</bs-button>
-            <bs-button type="secondary">Download</bs-button>
-            <bs-button type="secondary-outline">Download</bs-button>
-            <bs-button icon="trash" type="danger">Delete</bs-button>
-            <bs-button icon="trash" type="danger-outline">Delete</bs-button>
-        </div>
-        <div class="flex mt-8">
-            <bs-input />
-        </div>
-    </div> -->
 </template>
+
 <script setup>
 import BsButton from '@/Components/BsButton.vue';
 import BsInput from '@/Components/BsInput.vue';
 import MainLayout from '@/Layouts/MainLayout.vue';
-
 </script>

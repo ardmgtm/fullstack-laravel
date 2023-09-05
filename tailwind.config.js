@@ -15,10 +15,6 @@ export default {
             fontFamily: {
                 sans: ['Nunito Sans', ...defaultTheme.fontFamily.sans],
             },
-            gridTemplateColumns: {
-                "sidebar": "256px auto", //for sidebar layout
-                "sidebar-collapsed": "48px auto", //for collapsed sidebar layout
-            },
         },
         colors:{
             'white':"#ffffff",
@@ -49,15 +45,25 @@ export default {
                 'pressed':'#80251e',
                 'focus':'#f5dedc',
             },
+            'gray' : {
+                200:'#f6f6f6',
+                300:'#efeff0',
+                400:'#e4e4e4',
+                500:'#c9c9cb',
+                600:'#a9a9ac',
+                700:'#8a8a8d',
+                800:'#6c6c70',
+                900:'#4f4f54',
+            }
         }
     },
 
     safelist: [
         {
-            pattern: /w-(20|60)/
+            pattern: /w-(20|64)/
         },
         {
-            pattern: /pl-(20|60)/
+            pattern: /pl-(20|64)/
         },
     ],
     plugins: [forms],

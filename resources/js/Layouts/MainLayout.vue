@@ -1,10 +1,10 @@
 <template>
     <div class="flex">
         <div class="top-0 fixed min-w-full z-50">
-            <div class="bg-[#f6f6f6] mx-auto p-2">
+            <div class="bg-gray-200 mx-auto p-2">
                 <div class="flex justify-between">
                     <div class="flex align-middle items-center m-2">
-                        <button class="mr-4 bg-white p-2 rounded-md" @click="() => collapsed = !collapsed">
+                        <button class="mr-4 ml-3 bg-white p-2 rounded-md" @click="() => collapsed = !collapsed">
                             <bs-icon icon="bars-3" class=""></bs-icon>
                         </button>
                         <a href="/">
@@ -28,12 +28,12 @@
                     </div>
                 </div>
             </div>
-            <div class="h-3 bg-[#f6f6f6]">
+            <div class="h-3 bg-gray-200">
                 <div class="flex-1 flex transition-[padding-left] duration-300 ease-in-out" :class="[
                     {'pl-20':collapsed},
-                    {'pl-60':!collapsed}
+                    {'pl-64':!collapsed}
                 ]">
-                    <div class="px-6 w-full">
+                    <div class="pr-6 w-full">
                         <div class="bg-white px-8 rounded-t-xl h-3">
                         </div>
                     </div>
@@ -46,10 +46,10 @@
             <!-- header & content -->
             <div class="flex-1 flex pt-20 transition-[padding-left] duration-300 ease-in-out" :class="[
                 {'pl-20':collapsed},
-                {'pl-60':!collapsed}
+                {'pl-64':!collapsed}
             ]">
                 <!-- Scrollable container -->
-                <div class="px-6 pb-6">
+                <div class="pr-6 pb-6">
                     <div class="flex-1">
                         <div class="bg-white rounded-xl p-8">
                             <slot />
