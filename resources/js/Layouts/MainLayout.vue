@@ -1,6 +1,6 @@
 <template>
-    <div class="flex">
-        <div class="top-0 fixed min-w-full z-50">
+    <div class="flex w-screen">
+        <div class="top-0 fixed z-50 w-screen">
             <div class="bg-gray-200 mx-auto p-2">
                 <div class="flex justify-between">
                     <div class="flex align-middle items-center m-2">
@@ -42,15 +42,15 @@
         </div>
         <div>
             <!-- sidebar -->
-            <layout-sidebar :collapsed="collapsed"></layout-sidebar>
+            <sidebar :collapsed="collapsed"></sidebar>
             <!-- header & content -->
-            <div class="flex-1 flex pt-20 transition-[padding-left] duration-300 ease-in-out" :class="[
+            <div class="flex-1 flex pt-20 transition-[padding-left] duration-300 ease-in-out w-screen" :class="[
                 {'pl-20':collapsed},
                 {'pl-64':!collapsed}
             ]">
                 <!-- Scrollable container -->
-                <div class="pr-6 pb-6">
-                    <div class="flex-1">
+                <div class="flex-1">
+                    <div class="w-full pr-6 pb-6">
                         <div class="bg-white rounded-xl p-8">
                             <slot />
                         </div>
@@ -64,7 +64,7 @@
 <script setup>
 import { ref } from 'vue';
 import BsIcon from '@/Components/BsIcon.vue';
-import LayoutSidebar from './Components/LayoutSidebar.vue';
+import Sidebar from './Components/Sidebar.vue';
 
 const collapsed = ref(false);
 </script>

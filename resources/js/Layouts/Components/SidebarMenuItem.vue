@@ -2,7 +2,8 @@
     <li :key="key" class="flex flex-col transition-colors duration-300 cursor-pointer pl-4" :class="[
         { 'rounded-md gap-4': !collapsed },
         { 'rounded-full w-10': collapsed },
-        { 'mb-4':!hasSubmenu||collapsed}
+        { 'mb-4':!hasSubmenu||collapsed},
+        { '': $page.url.startsWith(menuItem.href) },
     ]" @click="() => expanded = !expanded">
         <Link 
             :href="menuItem.href" 
