@@ -1,6 +1,6 @@
 <template>
-    <div class="flex w-screen">
-        <div class="top-0 fixed z-50 w-screen">
+    <div class="flex">
+        <div class="top-0 fixed z-50 w-full overflow-hidden">
             <div class="bg-gray-200 mx-auto p-2">
                 <div class="flex justify-between">
                     <div class="flex align-middle items-center m-2">
@@ -40,23 +40,28 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div class="flex flex-col min-h-screen w-screen overflow-hidden">
             <!-- sidebar -->
             <sidebar :collapsed="collapsed"></sidebar>
-            <!-- header & content -->
-            <div class="flex-1 flex pt-20 transition-[padding-left] duration-300 ease-in-out w-screen" :class="[
+            <!-- content -->
+            <div class="flex-grow pt-20 transition-[padding-left] duration-300 ease-in-out overflow-hidden" :class="[
                 {'pl-20':collapsed},
                 {'pl-64':!collapsed}
             ]">
-                <!-- Scrollable container -->
                 <div class="flex-1">
-                    <div class="w-full pr-6 pb-6">
+                    <div class="pr-6 pb-6 w-full">
                         <div class="bg-white rounded-xl p-8">
                             <slot />
                         </div>
                     </div>
                 </div>
             </div>
+            <footer class="text-xs text-gray-800 p-4" :class="[
+                {'pl-20':collapsed},
+                {'pl-64':!collapsed}
+            ]"> 
+                2023&copy; <span class=" font-bold">PT. Pupuk Kalimantan Timur</span>
+            </footer>
         </div>
     </div>
 </template>
