@@ -1,6 +1,6 @@
 <template>
     <button 
-        class="px-3 py-2 text-[12px] rounded-lg font-bold m-1" 
+        class="px-3 py-2 text-[12px] align-middle rounded-lg font-bold m-1" 
         :class="style"
     >
         <div class="flex items-center">

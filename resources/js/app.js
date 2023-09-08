@@ -1,5 +1,10 @@
 import './bootstrap';
+
+import 'element-plus/dist/index.css';
+import '../css/dx.material.pkt-scheme.css';
+
 import '../css/app.css';
+
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';

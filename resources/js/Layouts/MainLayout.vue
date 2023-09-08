@@ -11,9 +11,11 @@
             ]">
                 <div class="flex-1">
                     <div class="pr-6 pb-6 w-full">
-                        <div class="bg-white rounded-xl p-8">
-                            <slot />
-                        </div>
+                        <Transition name="page" mode="out-in" appear>
+                            <main :key="$page.url" class="bg-white rounded-xl p-8">
+                                <slot />
+                            </main>
+                        </Transition>
                     </div>
                 </div>
             </div>
@@ -33,3 +35,15 @@ const toogleCollapseSideMenu = (val)=>{
     collapsed.value = val;
 };
 </script>
+
+<style scoped>
+    .page-enter-active,
+    .page-leave-active {
+        transition: all .1s;
+    }
+
+    .page-enter,
+    .page-leave-active {
+        opacity: 0;
+    }
+</style>

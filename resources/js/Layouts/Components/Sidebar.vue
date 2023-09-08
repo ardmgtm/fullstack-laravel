@@ -15,6 +15,8 @@
                 </sidebar-menu-item>
             </ul>
         </nav>
+
+        <div class="absolute w-64 bg-[url('/images/pkt-pattern.png')] h-96 bottom-0 left-0 bg-contain"></div>
     </div>
 </template>
 

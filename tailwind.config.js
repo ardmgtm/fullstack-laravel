@@ -36,6 +36,9 @@ export default {
                 'pressed':'#be5a27',
                 'focus':'#fcefe5',
             },
+            'success' : {
+                DEFAULT:'#7aa659',
+            },
             'danger' : {
                 DEFAULT:'#cb3a31',
                 'main':'#cb3a31',

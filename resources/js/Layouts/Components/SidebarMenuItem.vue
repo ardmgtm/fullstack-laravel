@@ -46,7 +46,7 @@
                             :icon="menuItem.icon" 
                             class="group-hover:text-primary mr-1"
                             :class="[
-                                { 'text-primary': $page.url.startsWith(menuItem.href) },
+                                { 'text-primary': $page.url.startsWith(menuItem.href) || expanded},
                                 { 'text-gray-900': !$page.url.startsWith(menuItem.href) },
                             ]"
                         ></bs-icon>
@@ -58,21 +58,21 @@
                         v-if="!collapsed" 
                         class="group-hover:text-primary font-bold text-sm"
                         :class="[
-                            { 'text-primary': $page.url.startsWith(menuItem.href) },
+                            { 'text-primary': $page.url.startsWith(menuItem.href) || expanded},
                             { 'text-gray-900': !$page.url.startsWith(menuItem.href) },
                         ]"
                     >
                         {{ menuItem.label }}
                     </span>
                 </div>
-                <bs-icon class="group-hover:text-primary transition-transform duration-300" :class="[
-                    { '-rotate-180': expanded },
-                    { 'rotate-0': !expanded },
-                ]" icon="chevron-down" v-if="!collapsed">
+                <bs-icon class="group-hover:text-primary transition-transform duration-300 " :class="[
+                    { 'rotate-90 text-primary': expanded },
+                    { 'rotate-0 text-gray-800': !expanded },
+                ]" icon="chevron-right" v-if="!collapsed">
                 </bs-icon>
             </div>
         </div>
-        <div v-if="hasSubmenu && !collapsed" class="ml-1 transition-[max-height] duration-300 overflow-hidden ease-in-out" :class="[
+        <div v-if="hasSubmenu && !collapsed" class="ml-1 transition-[max-height] duration-500 overflow-hidden ease-in-out" :class="[
             { 'max-h-0': !expanded },
             { 'max-h-[2048px]': expanded },
         ]">
