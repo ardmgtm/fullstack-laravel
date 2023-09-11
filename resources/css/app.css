@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base{
+  input:focus {
+    @apply focus:ring-0 focus:ring-offset-0 focus:border-0
+  }
+}
+
 @layer components{
 
 }

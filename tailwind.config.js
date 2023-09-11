@@ -60,7 +60,6 @@ export default {
             }
         },
     },
-
     safelist: [
         {
             pattern: /w-(20|64)/
