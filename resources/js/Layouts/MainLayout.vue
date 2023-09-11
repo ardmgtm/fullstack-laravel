@@ -37,13 +37,13 @@ const toogleCollapseSideMenu = (val)=>{
 </script>
 
 <style scoped>
-    .page-enter-active,
-    .page-leave-active {
-        transition: all .1s;
+    .page-enter-from,
+    .page-leave-to {
+        opacity: 0;
     }
 
-    .page-enter,
+    .page-enter-active,
     .page-leave-active {
-        opacity: 0;
+        transition: opacity 0.3s ease-out;
     }
 </style>

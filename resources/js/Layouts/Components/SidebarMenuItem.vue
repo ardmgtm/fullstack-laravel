@@ -83,6 +83,7 @@
                     :key="index"
                     :collapsed="collapsed" 
                     :is-submenu="true"
+                    @expand="onChildExpand"
                 >
                 </sidebar-menu-item>
             </ul>
@@ -91,9 +92,11 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import BsIcon from '@/Components/BsIcon.vue';
 import { Link } from '@inertiajs/vue3';
+
+const emit = defineEmits(['expand']);
 
 const props = defineProps({
     key: Number,
@@ -103,9 +106,22 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    expand: {
+        type: Boolean,
+        default: false,
+    }
 })
-const expanded = ref(false);
+const expanded = ref(props.expand);
 const hasSubmenu = computed(() => {
     return props.menuItem.submenu != null && props.menuItem.submenu.length > 0;
 });
+onMounted(()=>{
+    var currentUrl = window.location.pathname;
+    if(currentUrl.startsWith(props.menuItem.href)){
+        emit("expand");
+    }
+})
+const onChildExpand = ()=>{
+    expanded.value = true;
+}
 </script>

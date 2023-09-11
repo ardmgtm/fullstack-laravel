@@ -1,7 +1,7 @@
 export const navItems = [
     {
         label: "Dashboard",
-        href: "/",
+        href: "/dashboard",
         icon: "home"
     },
     {

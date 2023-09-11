@@ -57,9 +57,9 @@
 
                 </div>
                 <div>
-                    <el-form :model="form" label-width="120px" label-position="left" require-asterisk-position="right">
+                    <el-form :model="form" label-width="200px" label-position="left" require-asterisk-position="right">
                         <el-form-item label="Activity name" :required="true">
-                            <el-input v-model="form.name"/>
+                            <el-input v-model="form.name" />
                         </el-form-item>
                         <el-form-item label="Activity zone">
                             <el-select v-model="form.region" placeholder="please select your zone">
@@ -100,7 +100,9 @@
                             <el-input v-model="form.desc" type="textarea" />
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" @click="onSubmit"><BsIcon icon="rocket-launch"></BsIcon> Submit</el-button>
+                            <el-button type="primary" @click="onSubmit">
+                                <BsIcon icon="rocket-launch"></BsIcon> Submit
+                            </el-button>
                             <el-button type="warning">Cancel</el-button>
                             <el-button type="danger">Delete</el-button>
                             <el-button type="success">Approve</el-button>
@@ -122,6 +124,7 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import am4themes_pkt_themes from "@/Core/Config/am4themes_pkt_themes";
+import { ElLoading } from 'element-plus';
 
 import {
     DxDataGrid,
@@ -205,10 +208,17 @@ const form = reactive({
     type: [],
     resource: '',
     desc: '',
-})
+});
 
 const onSubmit = () => {
-    console.log('submit!')
+    const loading = ElLoading.service({
+        lock: true,
+        customClass: "spinner-loading-img",
+        spinner: "disable-default-spinner",
+    });
+    setTimeout(() => {
+        loading.close()
+    }, 2000);
 }
 
 </script>

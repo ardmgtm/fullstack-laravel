@@ -25,4 +25,18 @@
         scrollbar-width: none;  /* Firefox */
     }
   }
+  .spinner-loading-img:before {
+      content: url(/images/loading.svg);
+      @apply absolute object-center scale-75 -translate-x-24 translate-y-10
+  }
+
+  .spinner-loading-img {
+      text-align: center;
+      padding-top: 18vh;
+      @apply font-bold
+  }
+
+  .disable-default-spinner {
+      display: none;
+  }
 }
