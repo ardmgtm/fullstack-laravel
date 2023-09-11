@@ -5,12 +5,12 @@
             <!-- sidebar -->
             <Sidebar :collapsed="collapsed"></Sidebar>
             <!-- content -->
-            <div class="flex-grow pt-20 transition-[padding-left] duration-300 ease-in-out overflow-hidden" :class="[
-                {'pl-20':collapsed},
-                {'pl-64':!collapsed}
+            <div class="pl-0 flex-grow pt-20 transition-[padding-left] duration-300 ease-in-out overflow-hidden" :class="[
+                {'md:pl-20':collapsed},
+                {'md:pl-64':!collapsed}
             ]">
                 <div class="flex-1">
-                    <div class="pr-6 pb-6 w-full">
+                    <div class="px-6 pb-6 w-full">
                         <Transition name="page" mode="out-in" appear>
                             <main :key="$page.url" class="bg-white rounded-xl p-8">
                                 <slot />
@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            <Footer></Footer>
+            <Footer :collapsed="collapsed"></Footer>
         </div>
     </div>
 </template>
@@ -30,7 +30,7 @@ import Header from './Components/Header.vue';
 import Sidebar from './Components/Sidebar.vue';
 import Footer from './Components/Footer.vue';
 
-const collapsed = ref(false);
+const collapsed = ref(true);
 const toogleCollapseSideMenu = (val)=>{
     collapsed.value = val;
 };
