@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\AuthenticationController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -15,10 +15,20 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/login',[AuthenticationController::class,'loginPage'])->name('login')->middleware('guest');
+Route::post('/login',[AuthenticationController::class,'login']);
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Home',[]);
-});
-Route::get('/report/daily', function () {
-    return Inertia::render('Report/DailyReport',[]);
+Route::middleware(['auth'])->group(function () {
+    Route::post('/logout',[AuthenticationController::class,'logout']);
+    
+    Route::get('/', function () {
+        return redirect('/dashboard');
+    });
+    
+    Route::get('/dashboard', function () {
+        return Inertia::render('Home',[]);
+    });
+    Route::get('/report/daily', function () {
+        return Inertia::render('Report/DailyReport',[]);
+    });
 });

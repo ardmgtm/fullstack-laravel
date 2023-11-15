@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('failed_jobs', function (Blueprint $table) {
-            $table->id();
+        Schema::create('tr_failed_jobs', function (Blueprint $table) {
+            $table->id('failed_job_id');
             $table->string('uuid')->unique();
             $table->text('connection');
             $table->text('queue');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('failed_jobs');
+        Schema::dropIfExists('tr_failed_jobs');
     }
 };

@@ -3,7 +3,7 @@
     <MainLayout>
         <p class="text-xl font-bold mb-5">Dashboard</p>
         <div class="grid grid-cols-12 grid-flow-row-dense gap-4">
-            <div class="col-span-4 p-4 rounded-xl border border-gray-400 flex-1">
+            <div class="col-span-12 lg:col-span-4 p-4 rounded-xl border border-gray-400 flex-1">
                 <div class="flex flex-row justify-between mb-4">
                     <div>
                         <div class="font-bold">Monthly Production</div>
@@ -14,7 +14,7 @@
                 </div>
                 <div ref="chartdiv" class="h-80 w-full"></div>
             </div>
-            <div class="col-span-8 p-4 rounded-xl border border-gray-400">
+            <div class="col-span-12 lg:col-span-8 p-4 rounded-xl border border-gray-400">
                 <div class="flex flex-row justify-between mb-4">
                     <div>
                         <div class="font-bold">Table Test</div>

@@ -24,8 +24,41 @@ export const navItems = [
         ]
     },
     {
-        label: "Checkout",
-        href: "/checkout",
-        icon: "shopping-cart"
+        label: "Master Data",
+        href: "/master",
+        icon: "square-3-stack-3d",
+        submenu:[
+            {
+                label: "Data 1",
+                href: "/master/data-1",
+            },
+            {
+                label: "Data 2",
+                href: "/master/data-2",
+            },
+        ]
+    },
+    {
+        label: "User Management",
+        href: "/users",
+        icon: "users",
+        submenu:[
+            {
+                label: "User",
+                href: "/user",
+            },
+            {
+                label: "User Role",
+                href: "/user-role",
+            },
+            {
+                label: "Permission",
+                href: "/user-permission",
+            },
+            {
+                label: "User Log",
+                href: "/user-log",
+            },
+        ]
     },
 ];

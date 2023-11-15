@@ -1,5 +1,6 @@
 <template>
-    <div class=" hidden md:block p-4 fixed h-screen max-h-screen mt-20 overflow-scroll w-20 no-scrollbar transition-[width] duration-300 ease-in-out bg-[url('/images/pkt-pattern.png')] bg-contain bg-left-bottom bg-no-repeat"
+    <div class="hidden lg:block p-4 fixed h-screen max-h-screen mt-20 overflow-scroll w-20 no-scrollbar transition-[width] 
+                duration-300 ease-in-out bg-[url('/images/pkt-pattern.png')] bg-contain bg-left-bottom bg-no-repeat bg-primary-surface z-50"
         :class="[
             { 'w-20': collapsed },
             { 'w-64': !collapsed }
@@ -15,8 +16,6 @@
                 </sidebar-menu-item>
             </ul>
         </nav>
-
-        <!-- <div class="absolute w-64 bg-[url('/images/pkt-pattern.png')] h-96 bottom-0 left-0 bg-contain"></div> -->
     </div>
 </template>
 

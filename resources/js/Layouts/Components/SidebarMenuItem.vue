@@ -3,7 +3,6 @@
         { 'rounded-md gap-4': !collapsed },
         { 'rounded-full w-10': collapsed },
         { 'mb-4':!hasSubmenu||collapsed},
-        { '': $page.url.startsWith(menuItem.href) },
     ]" @click="() => expanded = !expanded">
         <Link 
             :href="menuItem.href" 
@@ -25,16 +24,16 @@
                     <div v-else>
                         <div class="h-1 w-1 rounded-full bg-gray-900 mr-1 group-hover:bg-primary"></div>
                     </div>
-                    <span 
+                    <p 
                         v-if="!collapsed" 
-                        class="group-hover:text-primary font-bold text-sm"
+                        class="group-hover:text-primary font-bold text-sm line-clamp-1"
                         :class="[
                             { 'text-primary': $page.url.startsWith(menuItem.href) },
                             { 'text-gray-900': !$page.url.startsWith(menuItem.href) },
                         ]"
                     >
                         {{ menuItem.label }}
-                    </span>
+                    </p>
                 </div>
             </div>
         </Link>
@@ -56,7 +55,7 @@
                     </div>
                     <span 
                         v-if="!collapsed" 
-                        class="group-hover:text-primary font-bold text-sm"
+                        class="group-hover:text-primary font-bold text-sm line-clamp-1"
                         :class="[
                             { 'text-primary': $page.url.startsWith(menuItem.href) || expanded},
                             { 'text-gray-900': !$page.url.startsWith(menuItem.href) },

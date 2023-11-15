@@ -1,13 +1,13 @@
 <template>
     <div class="flex">
-        <Header @toogle-collapse="toogleCollapseSideMenu"></Header>
+        <Header @toogle-collapse="toogleCollapseSideMenu" :collapsed="collapsed"></Header>
         <div class="flex flex-col min-h-screen w-screen overflow-hidden">
             <!-- sidebar -->
             <Sidebar :collapsed="collapsed"></Sidebar>
             <!-- content -->
             <div class="pl-0 flex-grow pt-20 transition-[padding-left] duration-300 ease-in-out overflow-hidden" :class="[
-                {'md:pl-20':collapsed},
-                {'md:pl-64':!collapsed}
+                {'lg:pl-20':collapsed},
+                {'lg:pl-64':!collapsed}
             ]">
                 <div class="flex-1">
                     <div class="px-6 pb-6 w-full">
@@ -30,7 +30,7 @@ import Header from './Components/Header.vue';
 import Sidebar from './Components/Sidebar.vue';
 import Footer from './Components/Footer.vue';
 
-const collapsed = ref(true);
+const collapsed = ref(false);
 const toogleCollapseSideMenu = (val)=>{
     collapsed.value = val;
 };

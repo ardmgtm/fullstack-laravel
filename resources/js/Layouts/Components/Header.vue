@@ -30,13 +30,13 @@
                         <div class="hidden group-focus:block group-hover:block absolute top-11 mr-2 right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white focus:outline-none shadow-lg" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                             <div class="py-1" role="none">
                                 <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                                <Link href="#" class="flex flex-row px-4 py-2 text-gray-900 text-sm hover:bg-primary-surface hover:rounded-md" role="menuitem" tabindex="-1" id="menu-item-0">
+                                <Link href="/account" class="flex flex-row px-4 py-2 text-gray-900 text-sm hover:bg-primary-surface hover:rounded-md" role="menuitem" tabindex="-1" id="menu-item-0">
                                     <bs-icon icon="cog-8-tooth" class="mr-2"></bs-icon>
                                     Account settings
                                 </Link>
-                                <Link href="#" class="flex flex-row text-danger px-4 py-2 text-sm hover:bg-primary-surface hover:rounded-md" role="menuitem" tabindex="-1" id="menu-item-2">
+                                <Link href="/logout" method="post" as="button" class="flex flex-row text-danger px-4 py-2 text-sm hover:bg-primary-surface hover:rounded-md w-full" role="menuitem" tabindex="-1" id="menu-item-2">
                                     <bs-icon icon="arrow-right-on-rectangle" class="mr-2"></bs-icon>
-                                    Sign Out
+                                    Logout
                                 </Link>
                             </div>
                         </div>
@@ -45,9 +45,9 @@
             </div>
         </div>
         <div class="h-3 bg-primary-surface">
-            <div class="flex-1 flex transition-[padding-left] duration-300 ease-in-out" :class="[
-                { 'pl-20': collapsed },
-                { 'pl-64': !collapsed }
+            <div class="pl-0 flex-1 flex transition-[padding-left] duration-300 ease-in-out" :class="[
+                { 'md:pl-20': collapsed },
+                { 'md:pl-64': !collapsed }
             ]">
                 <div class="px-6 w-full">
                     <div class="bg-white px-8 rounded-t-xl h-3">
@@ -63,7 +63,7 @@ import BsIcon from '@/Components/BsIcon.vue';
 import { Link } from '@inertiajs/vue3';
 
 const emit = defineEmits(['toogleCollapse']);
-const collapsed = ref(true);
+const collapsed = ref(false);
 const toogleCollapseSideMenu = ()=>{
     collapsed.value = !collapsed.value;
     emit('toogleCollapse',collapsed.value);
