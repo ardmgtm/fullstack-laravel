@@ -12,7 +12,7 @@ use Inertia\Inertia;
 class AuthenticationController extends Controller
 {
     public function loginPage(Request $request){
-        return Inertia::render('Login',[]);
+        return Inertia::render('Login');
     }
 
     public function login(Request $request){
@@ -26,15 +26,16 @@ class AuthenticationController extends Controller
                 $user_name = explode('@', $mail)[0];
                 $user = User::where('npk', $user_name)->first();
                 if ($user) {
-                    Auth::login($user);
-                    return redirect()->intended(RouteServiceProvider::HOME);
+                    if($user->is_active){
+                        Auth::login($user);
+                        return redirect()->intended(RouteServiceProvider::HOME);
+                    }
                 }
             }
         }
 
-        if (Auth::attempt(['npk' => $username, 'password' => $password]))
+        if (Auth::attempt(['npk' => $username, 'password' => $password, 'is_active' => 1]))
         {
-            // $request->session()->regenerate();
             return redirect()->intended(RouteServiceProvider::HOME);
         } else {
             return redirect()->back()->withErrors([

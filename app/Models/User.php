@@ -23,6 +23,7 @@ class User extends Authenticatable
         'npk',
         'email',
         'password',
+        'is_active',
     ];
 
     protected $primaryKey = 'user_id';

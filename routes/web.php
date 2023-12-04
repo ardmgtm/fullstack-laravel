@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\RoleAndPermissionController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserRoleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,7 +23,7 @@ Route::post('/login',[AuthenticationController::class,'login']);
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout',[AuthenticationController::class,'logout']);
-    
+
     Route::get('/', function () {
         return redirect('/dashboard');
     });
@@ -31,4 +34,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/report/daily', function () {
         return Inertia::render('Report/DailyReport',[]);
     });
+
+    Route::get('/user',[UserController::class,'userManagePage']);
+    Route::get('/user/data-processing',[UserController::class,'dataProcessing']);
+    Route::get('/role-and-permission',[RoleAndPermissionController::class,'roleAndPemissionManagePage']);
 });

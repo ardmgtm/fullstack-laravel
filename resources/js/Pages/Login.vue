@@ -22,9 +22,9 @@
                         <el-form-item prop="password" label="Password" :required="true">
                             <el-input size="large" type="password" v-model="form.password"/>
                         </el-form-item>
+                        <el-button native-type="submit" type="primary" size="large" class="w-full mt-6" @click="login" :disabled="form.processing" :loading="form.processing">Login</el-button>
                     </el-form>
                 </div>
-                <el-button type="primary" size="large" class="w-full mt-6" @click="login" :disabled="form.processing" :loading="form.processing">Login</el-button>
             </div>
         </div>
         <div class="absolute bottom-0">
@@ -33,7 +33,7 @@
     </div>
 </template>
 <script setup>
-import { ref, onMounted, reactive } from 'vue';
+import { ref } from 'vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { ElMessage } from 'element-plus';
 

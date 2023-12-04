@@ -7,7 +7,7 @@
             <div class="pr-2" v-if="icon != null">
                 <bs-icon :icon="icon"></bs-icon>
             </div>
-            <div class="h-5">
+            <div class="h-5 flex items-center">
                 <slot/>
             </div>
         </div>

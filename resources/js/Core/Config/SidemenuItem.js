@@ -48,12 +48,8 @@ export const navItems = [
                 href: "/user",
             },
             {
-                label: "User Role",
-                href: "/user-role",
-            },
-            {
-                label: "Permission",
-                href: "/user-permission",
+                label: "Role & Permission",
+                href: "/role-and-permission",
             },
             {
                 label: "User Log",

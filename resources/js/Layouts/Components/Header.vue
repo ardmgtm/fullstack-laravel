@@ -19,8 +19,8 @@
                             <img src="/images/avatar-default.png" class="bg-[#e4e4e5] h-7 w-7 min-w-7 md:mr-2 rounded-full" />
                             <div class="hidden md:flex items-center">
                                 <div class=" flex flex-col text-gray-900">
-                                    <div class="w-32 truncate text-xs font-bold">Muhammad Ardhian Megatama</div>
-                                    <div class="w-32 truncate text-xs font-thin">K225744</div>
+                                    <div class="w-32 truncate text-xs font-bold">{{ $page.props.auth.user.name }}</div>
+                                    <div class="w-32 truncate text-xs font-thin">{{ $page.props.auth.user.npk }}</div>
                                 </div>
                                 <div class="ml-2">
                                     <bs-icon icon="chevron-down"></bs-icon>
