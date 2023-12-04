@@ -1,7 +1,7 @@
 <template>
     <Head title="Daily Report" />
     <MainLayout>
-        Test
+        Hello World
     </MainLayout>
 </template>
 <script setup>
