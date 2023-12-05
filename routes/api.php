@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\RoleAndPermissionApi;
 use App\Http\Controllers\Api\UserApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,5 +26,10 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::put('/user/{id}', 'update');
         Route::delete('/user/{id}', 'delete');
         Route::put('/user/{id}/switch-status','switchStatus');
+    });
+    Route::controller(RoleAndPermissionApi::class)->group(function () {
+        Route::post('/role', 'create');
+        Route::put('/role/{id}', 'update');
+        Route::delete('/role/{id}', 'delete');
     });
 });

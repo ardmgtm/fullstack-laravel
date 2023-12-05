@@ -29,9 +29,6 @@
                                 <el-dropdown-item @click="editUserAction(data.data)">
                                     <BsIcon icon="pencil-square" class="mr-2" /> Edit User
                                 </el-dropdown-item>
-                                <!-- <el-dropdown-item>
-                                    <BsIcon icon="key" class="mr-2" /> Change Password
-                                </el-dropdown-item> -->
                                 <el-dropdown-item v-if="!data.data.is_active" @click="switchUserStatus(data.data,true)">
                                     <BsIcon icon="arrow-path-rounded-square" class="mr-2" /> Enable User
                                 </el-dropdown-item>
@@ -242,7 +239,7 @@ function deleteUserAction(dataUser) {
         .catch(() => {
             ElMessage({
                 type: 'info',
-                message: 'Mengahpus user dibatalkan',
+                message: 'Menghapus user dibatalkan',
             })
         })
 }
