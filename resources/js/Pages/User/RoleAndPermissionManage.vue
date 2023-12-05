@@ -4,7 +4,7 @@
         <div class="flex">
             <div class="w-96 mr-4 flex-flex-col">
                 <div class="flex justify-end mb-4">
-                    <el-input placeholder="Search">
+                    <el-input placeholder="Search" v-model="search">
                         <template #prefix>
                             <BsIcon icon="magnifying-glass"></BsIcon>
                         </template>
@@ -20,7 +20,7 @@
                     <div v-else>
                         <button
                             class="bg-white p-4 rounded-xl border border-gray-400  w-full mb-2 hover:bg-primary-surface focus:bg-primary focus:text-white"
-                            v-for="role in roles">
+                            v-for="role in filteredRoles">
                             <div class="flex flex-row justify-between items-center">
                                 <div class="flex flex-row items-center">
                                     <div class="flex flex-col items-start">
@@ -95,13 +95,17 @@ import { ref, computed, reactive } from 'vue';
 
 const dialogFormRoleVisible = ref(false);
 const editMode = ref(false);
-var roles = computed(() => usePage().props.roles);
-var isRolesEmpty = computed(() => roles.value.length < 1);
-var formUserRoleRef = ref();
+const formUserRoleRef = ref();
+const search = ref('');
 const formUserRole = reactive({
     id: '',
     name: '',
 });
+const roles = computed(() => usePage().props.roles);
+const filteredRoles = computed(()=>{
+    return roles.value.filter(role => role.name.toLowerCase().includes(search.value.toLowerCase()));
+});
+const isRolesEmpty = computed(() => filteredRoles.value.length < 1);
 
 function closeDialog() {
     dialogFormRoleVisible.value = false;
