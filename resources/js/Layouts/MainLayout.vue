@@ -13,6 +13,7 @@
                     <div class="px-6 pb-6 w-full">
                         <Transition name="page" mode="out-in" appear>
                             <main :key="$page.url" class="bg-white rounded-xl p-8">
+                                <p class="text-xl font-bold mb-5">{{ title }}</p>
                                 <slot />
                             </main>
                         </Transition>
@@ -30,6 +31,11 @@ import Header from './Components/Header.vue';
 import Sidebar from './Components/Sidebar.vue';
 import Footer from './Components/Footer.vue';
 
+const props = defineProps({
+    title:{
+        type: String
+    }
+});
 const collapsed = ref(false);
 const toogleCollapseSideMenu = (val)=>{
     collapsed.value = val;

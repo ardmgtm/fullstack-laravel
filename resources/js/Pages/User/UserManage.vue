@@ -1,6 +1,6 @@
 <template>
     <Head title="Manage User" />
-    <MainLayout>
+    <MainLayout title="User Manage">
         <div class="flex flex-col">
             <DxDataGrid ref="datagridRef" :data-source="dataSource" key-expr="user_id" :remote-operations="remoteOperations"
                 :item-per-page="10" @selection-changed="onSelectionChanged" @exporting="onExporting">
@@ -52,7 +52,7 @@
                 </DxToolbar>
                 <template #buttonTemplate>
                     <div class="flex flex-row w-full">
-                        <Transition mode="out-in" appear>
+                        <Transition name="fade" mode="out-in" appear>
                             <div v-if="!itemSelected">
                                 <BsButton type="primary" icon="plus" @click="addUserAction">Add User</BsButton>
                                 <BsButton type="primary" icon="arrow-path" @click="refreshDatagrid">Refresh</BsButton>
@@ -374,13 +374,13 @@ function clearSelection(){
 </script>
 
 <style scoped>
-/* we will explain what these classes do next! */
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.2s ease;
-}
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.2s ease;
+  }
 
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}</style>
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
+</style>
