@@ -11,7 +11,7 @@ class RoleAndPermissionController extends Controller
 {
     public function roleAndPemissionManagePage(Request $request){
         return Inertia::render('User/RoleAndPermissionManage',[
-            'roles' => Role::with(['permissions','users'])->get()
+            'roles' => Role::all()
         ]);
     }
 }

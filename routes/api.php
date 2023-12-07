@@ -29,7 +29,10 @@ Route::middleware('auth:sanctum')->group(function(){
     });
     Route::controller(RoleAndPermissionApi::class)->group(function () {
         Route::post('/role', 'create');
+        Route::put('/role/switch-permission', 'switchPermission');
+        
         Route::put('/role/{id}', 'update');
         Route::delete('/role/{id}', 'delete');
+        Route::get('/role/{id}/permissions','getRolePermission');
     });
 });

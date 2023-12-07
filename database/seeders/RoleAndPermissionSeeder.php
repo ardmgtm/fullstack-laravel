@@ -43,8 +43,9 @@ class RoleAndPermissionSeeder extends Seeder
             foreach ($permissionGroup['permissions'] as $permission) {
                 Permission::updateOrCreate([
                     'name' => $groupName.'.'.$permission,
-                    'guard_name' => 'web'
-                ],[]);
+                ],[
+                    'guard_name' => 'sanctum'
+                ]);
             }
         }
     }

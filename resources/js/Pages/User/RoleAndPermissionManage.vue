@@ -2,7 +2,7 @@
     <Head title="Role & Permission" />
     <MainLayout title="Role & Permission">
         <div class="flex">
-            <div class="w-96 mr-4 flex-flex-col flex-grow-0 flex-shrink-0">
+            <div class="w-80 mr-4 flex-flex-col flex-grow-0 flex-shrink-0">
                 <div class="flex justify-end mb-4">
                     <el-input placeholder="Search" v-model="search">
                         <template #prefix>
@@ -19,19 +19,31 @@
                     </div>
                     <div v-else>
                         <button
-                            class="group bg-white p-4 rounded-xl border border-gray-400  w-full mb-2 hover:bg-primary-surface focus:bg-primary focus:text-white"
-                            v-for="role in filteredRoles" :key="role.id">
+                            class="p-4 rounded-xl border border-gray-400  w-full mb-2"
+                            :class="[
+                                {'bg-primary' : role.id == idSelectedRole},
+                                {'bg-white hover:bg-primary-surface' : role.id != idSelectedRole},
+                            ]"
+                            v-for="role in filteredRoles" :key="role.id" @click="selectingRole(role)">
                             <div class="flex flex-row justify-between items-center">
                                 <div class="flex flex-row items-center">
                                     <div class="flex flex-col items-start">
-                                        <span class="font-bold">{{ role.name }}</span>
-                                        <span class="text-sm text-gray-700 group-focus:text-white">{{ role.users.length }} Users | {{ role.permissions.length }} permission granted</span>
+                                        <span class="font-bold text-left" 
+                                            :class="[
+                                                {'text-white' : role.id == idSelectedRole},
+                                                {'text-black' : role.id != idSelectedRole},
+                                            ]">
+                                            {{ role.name }}
+                                        </span>
                                     </div>
                                 </div>
                                 <div>
                                     <el-dropdown trigger="click" placement="bottom-end">
                                         <span class="el-dropdown-link">
-                                            <BsIcon icon="ellipsis-vertical" class="group-focus:text-white" />
+                                            <BsIcon icon="ellipsis-vertical" :class="[
+                                                {'text-white' : role.id == idSelectedRole},
+                                                {'text-black' : role.id != idSelectedRole},
+                                            ]" />
                                         </span>
                                         <template #dropdown>
                                             <el-dropdown-menu>
@@ -52,7 +64,7 @@
             </div>
             <div class="grow">
                 <div class="col-span-12 lg:col-span-4 p-4 flex-1 bg-primary-surface rounded-xl">
-                    <div class="h-[500px] w-full flex items-center justify-center flex-col" v-if="false">
+                    <div class="h-[500px] w-full flex items-center justify-center flex-col" v-if="!isAnyRoleSelected">
                         <BsIcon icon="exclamation-triangle" size="48" class=" text-secondary"></BsIcon>
                         <h4 class="text-xl font-bold mb-2">No User Role Selected</h4>
                         <span class="w-56 text-center text-gray-700">
@@ -60,30 +72,38 @@
                         </span>
                     </div>
                     <div v-else>
-                        <div class="flex flex-col">
-                            <div class="flex flex-row justify-between items-center mb-4">
-                                <h3 class="text-xl font-bold">Superadmin</h3>
-                                <div>
-                                    <BsButton icon="pencil">Rename</BsButton>
-                                    <BsButton type="danger" icon="trash">Delete</BsButton>
-                                </div>
+                        <Transition name="fade" mode="out-in" appear>
+                            <div class="h-[500px] w-full flex items-center justify-center flex-col" v-if="permissionLoading">
+                                <BsLoading size="100"/>
                             </div>
-                            <el-tabs v-model="activeTab" class="demo-tabs" @tab-click="handleClick">
-                                <el-tab-pane label="Permission" name="permission">
-                                    <div class="bg-white rounded-lg p-4">
-                                        <h5 class="text-md font-bold mb-2">Permission Group</h5>
-                                        <hr/>
-                                        <div class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 mt-2">
-                                            <div class="flex flex-row justify-between items-center px-4 py-2" v-for="i in [...Array(6).keys()]">
-                                                <span class="text-gray-800">Permission {{ i+1 }}</span>
-                                                <el-switch/>
+                            <div v-else class="flex flex-col">
+                                <div class="flex flex-row justify-between items-center mb-4">
+                                    <div class="flex flex-col">
+                                        <h3 class="text-xl font-bold">{{ selectedRole.name }}</h3>
+                                        <span class="text-sm text-gray-800">{{ totalPermissionGranted }} Permission Granted | 0 Users</span>
+                                    </div>
+                                    <div>
+                                        <BsButton icon="pencil" @click="editUserRoleAction(selectedRole)">Rename</BsButton>
+                                        <BsButton type="danger" icon="trash" @click="deleteUserRoleAction(selectedRole)">Delete</BsButton>
+                                    </div>
+                                </div>
+                                <el-tabs v-model="activeTab" class="demo-tabs" @tab-click="handleClick">
+                                    <el-tab-pane label="Permission" name="permission">
+                                        <div class="bg-white rounded-lg p-4 mb-2 shadow-md" v-for="permissionList,permissionGroupName in rolePermissions">
+                                            <h5 class="text-md font-bold">{{ parsePermissionName(permissionGroupName) }}</h5>
+                                            <el-divider />
+                                            <div class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3">
+                                                <div class="flex flex-row justify-between items-center px-4 py-2" v-for="permissionObj in permissionList">
+                                                    <span class="text-gray-800">{{ parsePermissionName(permissionObj.name) }}</span>
+                                                    <el-switch :active-value="1" :inactive-value="0" v-model="permissionObj.role_has_permission" @change="(newValue)=>onSwitchChange(selectedRole.id, permissionObj, newValue)"/>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </el-tab-pane>
-                                <el-tab-pane label="User" name="user">User</el-tab-pane>
-                            </el-tabs>
-                        </div>
+                                    </el-tab-pane>
+                                    <el-tab-pane label="User" name="user">User</el-tab-pane>
+                                </el-tabs>
+                            </div>
+                        </Transition>
                     </div>
                 </div>
             </div>
@@ -116,9 +136,11 @@
 import BsButton from '@/Components/BsButton.vue';
 import BsIconButton from '@/Components/BsIconButton.vue';
 import BsIcon from '@/Components/BsIcon.vue';
+import BsLoading from '@/Components/BsLoading.vue';
 import MainLayout from '@/Layouts/MainLayout.vue';
 import { Head, usePage, router } from '@inertiajs/vue3';
 import { ref, computed, reactive } from 'vue';
+import { ElMessage } from 'element-plus';
 
 // CRUD user role
 const dialogFormRoleVisible = ref(false);
@@ -217,6 +239,7 @@ function deleteUserRoleAction(dataRole) {
                         message: responseData.msg,
                         type: 'success',
                     });
+                    idSelectedRole.value = null;
                     router.reload({ only: ['roles'] });
                 })
                 .catch((error) => {
@@ -237,5 +260,72 @@ function deleteUserRoleAction(dataRole) {
 
 // Role permission & User
 const activeTab = ref('permission');
+const idSelectedRole = ref(null);
+const rolePermissions = ref(null);
+const totalPermissionGranted = ref(0);
+const selectedRole = computed(()=>roles.value.filter(role => role.id == idSelectedRole.value)[0]);
+const isAnyRoleSelected = computed(()=>idSelectedRole.value!=null);
+const permissionLoading = ref(false);
+
+function selectingRole(dataRole){
+    this.idSelectedRole = dataRole.id;
+    permissionLoading.value = true;
+    axios.get('/api/role/' + dataRole.id + '/permissions')
+        .then((response) => {
+            var responseData = response.data;
+            rolePermissions.value = responseData.data.permissions;
+            totalPermissionGranted.value = responseData.data.total_assigned_permission;
+        })
+        .catch((error) => {
+            var errorResponseData = error.response.data;
+            ElMessage({
+                message: errorResponseData.msg,
+                type: 'error',
+            });
+        })
+        .finally(()=>{
+            setTimeout(() => {
+                permissionLoading.value = false;
+            }, 500)
+        });
+}
+function parsePermissionName(str){
+    let text = str.split('.').slice(-1)[0];
+    let words = text.split('_');
+    let result = words.map(word => word.charAt(0).toLowerCase() + word.slice(1)).join(' ');
+    result = result.charAt(0).toUpperCase() + result.slice(1);
+    return result;
+}
+function onSwitchChange(idRole, permissionData, newValue){
+    const formData = {
+        id_role : idRole,
+        id_permission : permissionData.id,
+        permission_name : permissionData.name,
+        value : newValue == 1 ? true : false,
+    };
+    return new Promise((resolve, reject) => {
+        return axios.put('/api/role/switch-permission',formData)
+            .then((response) => {
+                var responseData = response.data;
+                totalPermissionGranted.value = newValue == 0 ? totalPermissionGranted.value - 1 : totalPermissionGranted.value + 1;
+                ElMessage({
+                    message: responseData.msg,
+                    grouping: true,
+                    type: 'success',
+                });
+                return resolve(true);
+            })
+            .catch((error) => {
+                var errorResponseData = error.response.data;
+                permissionData.role_has_permission = newValue == 0 ? 1 : 0;
+                ElMessage({
+                    message: errorResponseData.msg,
+                    grouping: true,
+                    type: 'error',
+                });
+                return reject(new Error('error'));
+            });
+    })
+}
 
 </script>
