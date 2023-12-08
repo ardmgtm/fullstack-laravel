@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class UserApi extends Controller
 {
@@ -14,12 +15,14 @@ class UserApi extends Controller
         $data = $request->all();
         DB::beginTransaction();
         try {
-            User::create([
+            $user = User::create([
                 'name' => $data['name'],
                 'npk' => $data['npk'],
                 'email' => $data['email'],
                 'password' => $data['password'],
             ]);
+            $roles = Role::whereIn('id',$data['role'])->get();
+            $user->assignRole($roles);
             DB::commit();
             return response()->json([
                 'status' => true,
@@ -39,11 +42,14 @@ class UserApi extends Controller
         $data = $request->all();
         DB::beginTransaction();
         try {
-            User::find($id)->update([
+            $user = User::find($id);
+            $user->update([
                 'name' => $data['name'],
                 'npk' => $data['npk'],
                 'email' => $data['email'],
             ]);
+            $roles = Role::whereIn('id',$data['role'])->get();
+            $user->syncRoles($roles);
             DB::commit();
             return response()->json([
                 'status' => true,

@@ -44,7 +44,7 @@ class RoleAndPermissionSeeder extends Seeder
                 Permission::updateOrCreate([
                     'name' => $groupName.'.'.$permission,
                 ],[
-                    'guard_name' => 'sanctum'
+                    'guard_name' => 'web'
                 ]);
             }
         }

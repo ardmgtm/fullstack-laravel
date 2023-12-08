@@ -117,7 +117,7 @@
                 require-asterisk-position="right" autocomplete="off">
                 <el-form-item prop="name" label="Nama" :required="true">
                     <el-input v-model="formUserRole.name" autocomplete="one-time-code" autocorrect="off"
-                        spellcheck="false" />
+                        spellcheck="false" :maxlength="15" :show-word-limit="true"/>
                 </el-form-item>
             </el-form>
             <template #footer>

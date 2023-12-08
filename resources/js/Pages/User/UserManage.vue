@@ -12,13 +12,21 @@
                 <DxColumn data-field="npk" caption="NPK" :allowHeaderFiltering="false" />
                 <DxColumn data-field="name" caption="Nama" :allowHeaderFiltering="false" />
                 <DxColumn data-field="email" caption="Email" :allowHeaderFiltering="false" />
+                <DxColumn caption="Role" cell-template="role" width="150" :allowExporting="false" />
+                <template #role="{ data }">
+                    <div class="flex flex-col items-start justify-start">
+                        <div class="bg-primary rounded-full px-3 py-1 text-white m-px w-min text-xs" v-for="role in data.data.roles">
+                            {{ role.name }}
+                        </div>
+                    </div>
+                </template>
                 <DxColumn data-field="is_active" caption="Status" cell-template="user-status" width="150" alignment="center"
                     :allowFiltering="false" :allowHeaderFiltering="true" :customizeText="statusText" />
                 <template #user-status="{ data }">
                     <span v-if="data.data.is_active" class="px-4 py-2 rounded-md bg-success text-white">Aktif</span>
                     <span v-else class="px-4 py-2 rounded-md bg-danger text-white">Tidak Aktif</span>
                 </template>
-                <DxColumn cell-template="action" width="75" alignment="center" :allowExporting="false" />
+                <DxColumn cell-template="action" width="60" alignment="center" :allowExporting="false" />
                 <template #action="{ data }">
                     <el-dropdown trigger="click" placement="bottom-end">
                         <span class="el-dropdown-link">
@@ -84,6 +92,21 @@
                     <el-input type="password" v-model="formUser.password" autocomplete="one-time-code" autocorrect="off"
                         spellcheck="false" />
                 </el-form-item>
+                <el-form-item props="roles" label="Role">
+                    <el-select
+                        v-model="formUser.role"
+                        multiple
+                        placeholder="Select"
+                        class="w-full"
+                        >
+                        <el-option
+                            v-for="role in roles"
+                            :key="role.id"
+                            :label="role.name"
+                            :value="role.id"
+                        />
+                        </el-select>
+                </el-form-item>
             </el-form>
             <template #footer>
                 <span class="dialog-footer flex">
@@ -126,12 +149,14 @@ import BsIconButton from '@/Components/BsIconButton.vue';
 const formUserRef = ref();
 const dialogFormVisible = ref(false);
 const editMode = ref(false);
+const roles = computed(()=> usePage().props.roles);
 const formUser = reactive({
     user_id: '',
     name: '',
     npk: '',
     email: '',
     password: '',
+    role: [],
 });
 function closeDialog() {
     dialogFormVisible.value = false;
@@ -145,6 +170,7 @@ function addUserAction() {
     formUser.npk = '';
     formUser.email = '';
     formUser.password = '';
+    formUser.role = [];
 }
 async function addUserSubmitAction() {
     await formUserRef.value.validate((valid, _) => {
@@ -180,6 +206,7 @@ function editUserAction(dataUser) {
     formUser.npk = dataUser.npk;
     formUser.email = dataUser.email;
     formUser.password = '';
+    formUser.role = dataUser.roles.map(role=>role.id);
 }
 async function editUserSubmitAction() {
     await formUserRef.value.validate(async (valid, _) => {

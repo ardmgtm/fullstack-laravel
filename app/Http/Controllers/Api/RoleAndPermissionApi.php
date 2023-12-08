@@ -17,6 +17,7 @@ class RoleAndPermissionApi extends Controller
         try {
             Role::create([
                 'name' => $data['name'],
+                'guard_name' => 'web',
             ]);
             DB::commit();
             return response()->json([
