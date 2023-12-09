@@ -9,24 +9,50 @@
                 <DxSelection select-all-mode="page" show-check-boxes-mode="always" mode="multiple" />
                 <DxColumnChooser :enabled="true" mode="select" />
                 <DxHeaderFilter :visible="true" />
+                <DxPaging :page-size="10"/>
+                <DxPager
+                    :visible="true"
+                    :allowed-page-sizes="[10,20,50]"
+                    :show-page-size-selector="true"
+                />
                 <DxColumn data-field="npk" caption="NPK" :allowHeaderFiltering="false" />
                 <DxColumn data-field="name" caption="Nama" :allowHeaderFiltering="false" />
                 <DxColumn data-field="email" caption="Email" :allowHeaderFiltering="false" />
-                <DxColumn caption="Role" cell-template="role" width="150" :allowExporting="false" />
+                <DxColumn caption="Role" cell-template="role" width="200" :allowExporting="false" />
                 <template #role="{ data }">
-                    <div class="flex flex-col items-start justify-start">
-                        <div class="bg-primary rounded-full px-3 py-1 text-white m-px w-min text-xs" v-for="role in data.data.roles">
-                            {{ role.name }}
+                    <div class="flex flex-row justify-start items-center" v-if="data.data.roles.length > 0">
+                        <div class="bg-primary rounded-full px-3 py-1 text-white m-px w-min text-xs">
+                            {{ data.data.roles[0].name }}
                         </div>
+
+                        <el-popover
+                            placement="top"
+                            :width="150"
+                            trigger="hover"
+                            v-if="data.data.roles.length > 1"
+                        >
+                            <template #reference>
+                                <div class=" bg-primary-hover rounded-full px-2 py-1 text-white m-px w-min text-xs cursor-pointer">
+                                    + {{ data.data.roles.length - 1 }}
+                                </div>
+                            </template>
+                            <template #default>
+                                <div class="w-full flex flex-col justify-center items-center">
+                                    <div class="bg-primary rounded-full px-3 py-1 text-white m-px text-xs w-fit" v-for="role in data.data.roles.slice(1,data.data.roles.length)">
+                                        {{ role.name }}
+                                    </div>
+                                </div>
+                            </template>
+                        </el-popover>
                     </div>
                 </template>
-                <DxColumn data-field="is_active" caption="Status" cell-template="user-status" width="150" alignment="center"
+                <DxColumn data-field="is_active" caption="Status" cell-template="user-status" width="110" alignment="center"
                     :allowFiltering="false" :allowHeaderFiltering="true" :customizeText="statusText" />
                 <template #user-status="{ data }">
-                    <span v-if="data.data.is_active" class="px-4 py-2 rounded-md bg-success text-white">Aktif</span>
-                    <span v-else class="px-4 py-2 rounded-md bg-danger text-white">Tidak Aktif</span>
+                    <span v-if="data.data.is_active" class="px-4 py-2 rounded-md bg-success text-white text-xs">Active</span>
+                    <span v-else class="px-4 py-2 rounded-md bg-danger text-white text-xs">Inactive</span>
                 </template>
-                <DxColumn cell-template="action" width="60" alignment="center" :allowExporting="false" />
+                <DxColumn cell-template="action" width="60" alignment="center" :allowExporting="false" :showInColumnChooser="false"/>
                 <template #action="{ data }">
                     <el-dropdown trigger="click" placement="bottom-end">
                         <span class="el-dropdown-link">
@@ -130,6 +156,8 @@ import {
     DxHeaderFilter,
     DxFilterRow,
     DxItem,
+    DxPager,
+    DxPaging,
     DxSelection,
     DxToolbar
 } from 'devextreme-vue/data-grid';
@@ -386,7 +414,7 @@ function onExporting(e) {
 };
 
 function statusText(data) {
-    return data.value == 0 ? 'Tidak Aktif' : 'Aktif';
+    return data.value == 0 ? 'Inactive' : 'Active';
 }
 
 function clearSelection(){

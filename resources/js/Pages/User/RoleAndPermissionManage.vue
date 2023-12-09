@@ -18,8 +18,8 @@
                         </span>
                     </div>
                     <div v-else>
-                        <button
-                            class="p-4 rounded-xl border border-gray-400  w-full mb-2"
+                        <div
+                            class="p-4 rounded-xl border border-gray-400  w-full mb-2 cursor-pointer"
                             :class="[
                                 {'bg-primary' : role.id == idSelectedRole},
                                 {'bg-white hover:bg-primary-surface' : role.id != idSelectedRole},
@@ -58,7 +58,7 @@
                                     </el-dropdown>
                                 </div>
                             </div>
-                        </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -268,7 +268,7 @@ const isAnyRoleSelected = computed(()=>idSelectedRole.value!=null);
 const permissionLoading = ref(false);
 
 function selectingRole(dataRole){
-    this.idSelectedRole = dataRole.id;
+    idSelectedRole.value = dataRole.id;
     permissionLoading.value = true;
     axios.get('/api/role/' + dataRole.id + '/permissions')
         .then((response) => {

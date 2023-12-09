@@ -58,7 +58,7 @@
                 <div>
                     <el-form :model="form" label-width="200px" label-position="left" require-asterisk-position="right">
                         <el-form-item label="Activity name" :required="true">
-                            <el-input v-model="form.name" />
+                            <el-input v-model="form.name" class=" rounded-lg"/>
                         </el-form-item>
                         <el-form-item label="Activity zone">
                             <el-select v-model="form.region" placeholder="please select your zone">
