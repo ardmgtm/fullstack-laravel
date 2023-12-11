@@ -31,11 +31,12 @@ class UserApi extends Controller
             ],200);
         } catch (\Throwable $th) {
             DB::rollBack();
+            $request->merge(['errors' => $th]);
             return response()->json([
                 'status' => false,
                 'msg' => 'Gagal menambahkan User',
                 'data' => [],
-            ],400);
+            ],500);
         }
     }
     public function update(Request $request, $id){
@@ -58,15 +59,24 @@ class UserApi extends Controller
             ], 200);
         } catch (\Throwable $th) {
             DB::rollBack();
+            $request->merge(['errors' => $th]);
             return response()->json([
                 'status' => false,
                 'msg' => 'Gagal mengubah user',
                 'data' => [],
-            ], 400);
+            ], 500);
         }
     }
     public function delete(Request $request, $id){
         DB::beginTransaction();
+        $authUserId = Auth::id();
+        if($id == $authUserId){
+            return response()->json([
+                'status' => false,
+                'msg' => 'Gagal menghapus user',
+                'data' => [],
+            ], 401);
+        }
         try {
             User::find($id)->delete();
             DB::commit();
@@ -77,11 +87,12 @@ class UserApi extends Controller
             ], 200);
         } catch (\Throwable $th) {
             DB::rollBack();
+            $request->merge(['errors' => $th]);
             return response()->json([
                 'status' => false,
                 'msg' => 'Gagal menghapus user',
                 'data' => [],
-            ], 400);
+            ], 500);
         }
     }
     public function switchStatus(Request $request,$id){
@@ -93,7 +104,7 @@ class UserApi extends Controller
                 'status' => false,
                 'msg' => 'Gagal mengubah user',
                 'data' => [],
-            ], 400);
+            ], 401);
         }
         try {
             User::find($id)->update([
@@ -107,11 +118,12 @@ class UserApi extends Controller
             ], 200);
         } catch (\Throwable $th) {
             DB::rollBack();
+            $request->merge(['errors' => $th]);
             return response()->json([
                 'status' => false,
                 'msg' => 'Gagal mengubah user',
                 'data' => [],
-            ], 400);
+            ], 500);
         }
     }
 }
