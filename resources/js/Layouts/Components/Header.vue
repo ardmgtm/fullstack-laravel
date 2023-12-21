@@ -3,20 +3,20 @@
         <div class="bg-primary-surface mx-auto p-2">
             <div class="flex justify-between">
                 <div class="flex align-middle items-center m-2">
-                    <button class="mr-4 ml-3 bg-white p-2 rounded-md shadow-md" @click="toogleCollapseSideMenu">
+                    <button class="mr-4 ml-3 bg-white p-2 rounded-md shadow-md" @click="toogleCollapseSideMenu" aria-label="menu-btn">
                         <bs-icon icon="bars-3" class=""></bs-icon>
                     </button>
                     <a href="/">
-                        <img src="/images/logo-long.png" class="max-h-7 w-auto" />
+                        <img src="/images/logo-long.png" class="max-h-7 w-auto" name="logo" alt="app-logo"/>
                     </a>
                 </div>
                 <div class="flex shrink-0 align-middle items-center m-2 relative">
-                    <button class="mr-2 p-2">
+                    <button class="mr-2 p-2" aria-label="notification-btn">
                         <bs-icon icon="bell" class=""></bs-icon>
                     </button>
-                    <a class="group" href="javascript:void(0)">
+                    <button class="group">
                         <div class="shrink-0 rounded-lg py-2 px-5 border-2 border-[#f1f4f6] flex align-middle items-center bg-white group-hover:bg-primary-surface cursor-pointer">
-                            <img src="/images/avatar-default.png" class="bg-[#e4e4e5] h-7 w-7 min-w-7 md:mr-2 rounded-full" />
+                            <img src="/images/avatar-default.png" class="bg-[#e4e4e5] h-7 w-7 min-w-7 md:mr-2 rounded-full" name="profile-picture" alt="profile-picture" />
                             <div class="hidden md:flex items-center">
                                 <div class=" flex flex-col text-gray-900">
                                     <div class="w-32 truncate text-xs font-bold">{{ $page.props.auth.user.name }}</div>
@@ -40,7 +40,7 @@
                                 </Link>
                             </div>
                         </div>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\RoleAndPermissionApi;
 use App\Http\Controllers\Api\UserApi;
+use App\Http\Controllers\Api\UserLogApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,8 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::delete('/role/{id}', 'delete');
         Route::get('/role/{id}/permissions','getRolePermission');
     });
+});
+Route::controller(UserLogApi::class)->group(function(){
+    Route::get('user-log/file-list', 'getLogFileList');
+    Route::get('user-log/{filename}', 'getLogFileDetail');
 });

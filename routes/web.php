@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\RoleAndPermissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserLogController;
 use App\Http\Controllers\UserRoleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,11 +32,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Home',[]);
     });
-    Route::get('/report/daily', function () {
-        return Inertia::render('Report/DailyReport',[]);
-    });
 
     Route::get('/user',[UserController::class,'userManagePage']);
     Route::get('/user/data-processing',[UserController::class,'dataProcessing']);
     Route::get('/role-and-permission',[RoleAndPermissionController::class,'roleAndPemissionManagePage']);
+    Route::get('/user-log',[UserLogController::class,'userLogPage']);
 });

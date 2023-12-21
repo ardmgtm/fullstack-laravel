@@ -16,8 +16,8 @@
                             :icon="menuItem.icon" 
                             class="group-hover:text-primary mr-1"
                             :class="[
-                                { 'text-primary': $page.url.startsWith(menuItem.href) },
-                                { 'text-gray-900': !$page.url.startsWith(menuItem.href) },
+                                { 'text-primary': isActiveSubmenu },
+                                { 'text-gray-900': !isActiveSubmenu },
                             ]"
                         ></bs-icon>
                     </div>
@@ -28,8 +28,8 @@
                         v-if="!collapsed" 
                         class="group-hover:text-primary font-bold text-sm line-clamp-1"
                         :class="[
-                            { 'text-primary': $page.url.startsWith(menuItem.href) },
-                            { 'text-gray-900': !$page.url.startsWith(menuItem.href) },
+                            { 'text-primary': isActiveSubmenu },
+                            { 'text-gray-900': !isActiveSubmenu },
                         ]"
                     >
                         {{ menuItem.label }}
@@ -45,8 +45,8 @@
                             :icon="menuItem.icon" 
                             class="group-hover:text-primary mr-1"
                             :class="[
-                                { 'text-primary': $page.url.startsWith(menuItem.href) || expanded},
-                                { 'text-gray-900': !$page.url.startsWith(menuItem.href) },
+                                { 'text-primary': isActiveSubmenu || expanded},
+                                { 'text-gray-900': !isActiveSubmenu },
                             ]"
                         ></bs-icon>
                     </div>
@@ -57,8 +57,8 @@
                         v-if="!collapsed" 
                         class="group-hover:text-primary font-bold text-sm line-clamp-1"
                         :class="[
-                            { 'text-primary': $page.url.startsWith(menuItem.href) || expanded},
-                            { 'text-gray-900': !$page.url.startsWith(menuItem.href) },
+                            { 'text-primary': isActiveSubmenu || expanded},
+                            { 'text-gray-900': !isActiveSubmenu },
                         ]"
                     >
                         {{ menuItem.label }}
@@ -93,7 +93,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import BsIcon from '@/Components/BsIcon.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 
 const emit = defineEmits(['expand']);
 
@@ -111,6 +111,8 @@ const props = defineProps({
     }
 })
 const expanded = ref(props.expand);
+const isActiveSubmenu = ref(usePage().url == props.menuItem.href || usePage().url.startsWith(props.menuItem.href + '/'));
+
 const hasSubmenu = computed(() => {
     return props.menuItem.submenu != null && props.menuItem.submenu.length > 0;
 });

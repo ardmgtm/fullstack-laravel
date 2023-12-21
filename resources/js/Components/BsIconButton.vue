@@ -1,5 +1,5 @@
 <template>
-    <button class=" hover:bg-primary-surface p-2 rounded-full">
+    <button class=" hover:bg-primary-surface p-2 rounded-full" aria-label="icon-btn">
         <BsIcon :icon="icon"/>
     </button>
 </template>

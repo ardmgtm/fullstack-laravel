@@ -1,6 +1,6 @@
 <template>
-    <Head title="Manage User" />
-    <MainLayout title="User Manage">
+    <Head title="User Management" />
+    <MainLayout title="User Management">
         <div class="flex flex-col">
             <DxDataGrid ref="datagridRef" :data-source="dataSource" key-expr="user_id" :remote-operations="remoteOperations"
                 :item-per-page="10" @selection-changed="onSelectionChanged" @exporting="onExporting">

@@ -1,66 +1,99 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Fullstack Laravel + Vue + Inertia template
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Overview
 
-## About Laravel
+This project is a web application built with a modern stack that combines the power of Laravel, Vue.js, and Inertia.js. This stack provides a seamless and efficient development experience, allowing for the creation of dynamic and responsive single-page applications (SPAs).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Prerequisites
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Before you begin, make sure you have the following prerequisites installed on your development machine:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Backend Requirements
 
-## Learning Laravel
+1. **PHP >= 8.1:** Ensure that you have PHP >= 8.1 installed on your system. You can download it from [php.net](https://www.php.net/).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. **Composer:** Composer is a dependency manager for PHP. Install it by following the instructions at [getcomposer.org](https://getcomposer.org/).
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Frontend Requirements
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. **Node.js and NPM:** Node.js is required for running JavaScript on the server side, and NPM is used for managing JavaScript packages. Download and install Node.js from [nodejs.org](https://nodejs.org/), and NPM will be included.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+## Getting Started
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Follow these steps to set up and run the project locally:
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ardmgtm/fullstack-laravel.git project-name
+   cd project-name
+   rm -rf .git
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   composer install
+    ```
+
+3. **Configure Environment Variables**
+
+   ```bash
+   cp .env.example .env
+   ```
+   configure your database connection in .env
+   ```javascript
+   DB_CONNECTION=<your-db-connection>
+   DB_HOST=<your-db-host>
+   DB_PORT=<your-db-port>
+   DB_DATABASE=<your-db-name>
+   DB_USERNAME=<your-db-connection-username>
+   DB_PASSWORD=<your-db-connection-password>
+   ```
+4. **Start development server**
+
+   Start Laravel development Server
+   ```bash
+   php artisan serve
+   ```
+   Compile js assets and watch change
+   ```bash
+   npm run dev
+   ```
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+We welcome contributions from the community! If you would like to contribute to this project, please follow these guidelines:
 
-## Code of Conduct
+### Issues
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Before submitting a new issue, please check the existing issues to ensure that the topic has not already been reported or discussed. If you find your issue, feel free to add any additional information or context.
 
-## Security Vulnerabilities
+If you're reporting a bug, please provide:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- A clear and descriptive title.
+- A detailed description of the issue, including steps to reproduce.
+- Information about your environment (e.g., operating system, browser, version).
 
-## License
+### Pull Requests
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+We encourage you to contribute to the project by submitting pull requests. Follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix: `git checkout -b feature-name`.
+3. Make your changes and commit them: `git commit -m 'Description of changes'`.
+4. Push your changes to your fork: `git push origin feature-name`.
+5. Submit a pull request to the main repository.
+
+In your pull request:
+
+- Provide a clear and descriptive title.
+- Explain the purpose of the changes.
+- Reference any related issues.
+
+### Coding Standards
+
+Please follow the coding standards and conventions used in the project. This includes code formatting, naming conventions, and other best practices.
+
+Thank you for contributing to our project!
