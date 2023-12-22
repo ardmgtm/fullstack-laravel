@@ -14,7 +14,7 @@
                     <button class="mr-2 p-2" aria-label="notification-btn">
                         <bs-icon icon="bell" class=""></bs-icon>
                     </button>
-                    <button class="group">
+                    <button class="group text-start">
                         <div class="shrink-0 rounded-lg py-2 px-5 border-2 border-[#f1f4f6] flex align-middle items-center bg-white group-hover:bg-primary-surface cursor-pointer">
                             <img src="/images/avatar-default.png" class="bg-[#e4e4e5] h-7 w-7 min-w-7 md:mr-2 rounded-full" name="profile-picture" alt="profile-picture" />
                             <div class="hidden md:flex items-center">

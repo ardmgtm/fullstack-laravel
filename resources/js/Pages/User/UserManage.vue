@@ -60,16 +60,16 @@
                         </span>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item @click="editUserAction(data.data)">
+                                <el-dropdown-item @click="editUserAction(data.data)" v-if="can('user.update')">
                                     <BsIcon icon="pencil-square" class="mr-2" /> Edit User
                                 </el-dropdown-item>
-                                <el-dropdown-item v-if="!data.data.is_active" @click="switchUserStatus(data.data,true)">
+                                <el-dropdown-item v-if="!data.data.is_active && can('user.update')" @click="switchUserStatus(data.data,true)">
                                     <BsIcon icon="arrow-path-rounded-square" class="mr-2" /> Enable User
                                 </el-dropdown-item>
-                                <el-dropdown-item v-else @click="switchUserStatus(data.data,false)">
+                                <el-dropdown-item v-else-if="can('user.update')" @click="switchUserStatus(data.data,false)">
                                     <BsIcon icon="arrow-path-rounded-square" class="mr-2" /> Disable User
                                 </el-dropdown-item>
-                                <el-dropdown-item @click="deleteUserAction(data.data)">
+                                <el-dropdown-item v-if="can('user.delete')" @click="deleteUserAction(data.data)">
                                     <BsIcon icon="trash" class="mr-2" /> Delete User
                                 </el-dropdown-item>
                             </el-dropdown-menu>
@@ -83,9 +83,9 @@
                 </DxToolbar>
                 <template #buttonTemplate>
                     <div class="flex flex-row w-full">
-                        <Transition name="fade" mode="out-in" appear>
+                        <Transition name="fadetransition" mode="out-in" appear>
                             <div v-if="!itemSelected">
-                                <BsButton type="primary" icon="plus" @click="addUserAction">Add User</BsButton>
+                                <BsButton type="primary" icon="plus" @click="addUserAction" v-if="can('user.create')">Add User</BsButton>
                                 <BsButton type="primary" icon="arrow-path" @click="refreshDatagrid">Refresh</BsButton>
                             </div>
                             <div v-else class="h-auto flex items-center px-4">
@@ -148,6 +148,7 @@
 import { ref, reactive } from 'vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import MainLayout from '@/Layouts/MainLayout.vue';
+import { can } from '@/Core/Helpers/permission-check';
 import {
     DxColumn,
     DxColumnChooser,

@@ -9,7 +9,7 @@
                             <BsIcon icon="magnifying-glass"></BsIcon>
                         </template>
                     </el-input>
-                    <BsIconButton icon="plus" @click="addUserRoleAction"></BsIconButton>
+                    <BsIconButton icon="plus" @click="addUserRoleAction" v-if="can('role.create')"></BsIconButton>
                 </div>
                 <div class="h-[500px] overflow-y-scroll scroll pr-2">
                     <div v-if="isRolesEmpty" class="h-full w-full flex items-center justify-center">
@@ -37,26 +37,6 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div>
-                                    <el-dropdown trigger="click" placement="bottom-end">
-                                        <span class="el-dropdown-link">
-                                            <BsIcon icon="ellipsis-vertical" :class="[
-                                                {'text-white' : role.id == idSelectedRole},
-                                                {'text-black' : role.id != idSelectedRole},
-                                            ]" />
-                                        </span>
-                                        <template #dropdown>
-                                            <el-dropdown-menu>
-                                                <el-dropdown-item @click="editUserRoleAction(role)">
-                                                    <BsIcon icon="pencil-square" class="mr-2"/> Rename
-                                                </el-dropdown-item>
-                                                <el-dropdown-item @click="deleteUserRoleAction(role)">
-                                                    <BsIcon icon="trash" class="mr-2"/> Delete
-                                                </el-dropdown-item>
-                                            </el-dropdown-menu>
-                                        </template>
-                                    </el-dropdown>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -72,7 +52,7 @@
                         </span>
                     </div>
                     <div v-else>
-                        <Transition name="fade" mode="out-in" appear>
+                        <Transition name="fadetransition" mode="out-in" appear>
                             <div class="h-[500px] w-full flex items-center justify-center flex-col" v-if="permissionLoading">
                                 <BsLoading size="100"/>
                             </div>
@@ -83,19 +63,21 @@
                                         <span class="text-sm text-gray-800">{{ totalPermissionGranted }} Permission Granted | 0 Users</span>
                                     </div>
                                     <div>
-                                        <BsButton icon="pencil" @click="editUserRoleAction(selectedRole)">Rename</BsButton>
-                                        <BsButton type="danger" icon="trash" @click="deleteUserRoleAction(selectedRole)">Delete</BsButton>
+                                        <BsButton icon="pencil" @click="editUserRoleAction(selectedRole)" v-if="can('role.update')">Rename</BsButton>
+                                        <BsButton type="danger" icon="trash" @click="deleteUserRoleAction(selectedRole)" v-if="can('role.delete')">Delete</BsButton>
                                     </div>
                                 </div>
                                 <el-tabs v-model="activeTab" class="demo-tabs" @tab-click="handleClick">
                                     <el-tab-pane label="Permission" name="permission">
-                                        <div class="bg-white rounded-lg p-4 mb-2 shadow-md" v-for="permissionList,permissionGroupName in rolePermissions">
-                                            <h5 class="text-md font-bold">{{ parsePermissionName(permissionGroupName) }}</h5>
-                                            <el-divider />
-                                            <div class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3">
-                                                <div class="flex flex-row justify-between items-center px-4 py-2" v-for="permissionObj in permissionList">
-                                                    <span class="text-gray-800">{{ parsePermissionName(permissionObj.name) }}</span>
-                                                    <el-switch :active-value="1" :inactive-value="0" v-model="permissionObj.role_has_permission" @change="(newValue)=>onSwitchChange(selectedRole.id, permissionObj, newValue)"/>
+                                        <div class="grid grid-cols-1 xl:grid-cols-2">
+                                            <div class="bg-white rounded-lg p-4 mx-2 mb-2 shadow-md" v-for="permissionList,permissionGroupName in rolePermissions">
+                                                <h5 class="text-md font-bold">{{ parsePermissionName(permissionGroupName) }}</h5>
+                                                <el-divider />
+                                                <div class="grid grid-cols-1 2xl:grid-cols-2">
+                                                    <div class="flex flex-row justify-between items-center px-4 py-2" v-for="permissionObj in permissionList">
+                                                        <span class="text-gray-800">{{ parsePermissionName(permissionObj.name) }}</span>
+                                                        <el-switch :disabled="!can('role.assign_permission')" :active-value="1" :inactive-value="0" v-model="permissionObj.role_has_permission" @change="(newValue)=>onSwitchChange(selectedRole.id, permissionObj, newValue)"/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -141,6 +123,7 @@ import MainLayout from '@/Layouts/MainLayout.vue';
 import { Head, usePage, router } from '@inertiajs/vue3';
 import { ref, computed, reactive } from 'vue';
 import { ElMessage } from 'element-plus';
+import { can } from '@/Core/Helpers/permission-check';
 
 // CRUD user role
 const dialogFormRoleVisible = ref(false);

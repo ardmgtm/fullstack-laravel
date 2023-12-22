@@ -61,13 +61,13 @@
     background: #555;
   }
 
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 0.2s ease;
-  }
+}
+.fadetransition-enter-active,
+.fadetransition-leave-active {
+  transition: opacity 0.2s ease;
+}
 
-  .fade-enter-from,
-  .fade-leave-to {
-    opacity: 0;
-  }
+.fadetransition-enter-from,
+.fadetransition-leave-to {
+  opacity: 0;
 }
