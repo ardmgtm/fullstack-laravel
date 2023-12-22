@@ -7,13 +7,18 @@
         ]">
         <nav class="flex-grow">
             <ul class="my-2 flex flex-col gap-2 items-stretch">
-                <sidebar-menu-item 
-                    v-for="menuItem,index in sideMenuItems"
-                    :menu-item="menuItem"
-                    :key="index"
-                    :collapsed="collapsed"
-                >
-                </sidebar-menu-item>
+                <div 
+                    v-for="menuItem,index in sideMenuItems" 
+                    :key="index"> 
+                    <sidebar-menu-item 
+                        v-if="can(menuItem.permission)"
+                        :menu-item="menuItem"
+                        :key="index"
+                        :collapsed="collapsed"
+                    >
+                    {{  menuItem.permission }}
+                    </sidebar-menu-item>
+                </div>
             </ul>
         </nav>
     </div>
@@ -23,6 +28,7 @@
 import { ref } from 'vue';
 import {navItems} from '@/Core/Config/SidemenuItem';
 import SidebarMenuItem from './SidebarMenuItem.vue';
+import { can } from '@/Core/Helpers/permission-check';
 
 const prop = defineProps({
     collapsed: Boolean,

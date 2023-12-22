@@ -33,8 +33,8 @@ Route::middleware(['auth'])->group(function () {
         return Inertia::render('Home',[]);
     });
 
-    Route::get('/user',[UserController::class,'userManagePage']);
+    Route::get('/user',[UserController::class,'userManagePage'])->can('user.browse');
     Route::get('/user/data-processing',[UserController::class,'dataProcessing']);
-    Route::get('/role-and-permission',[RoleAndPermissionController::class,'roleAndPemissionManagePage']);
+    Route::get('/role-and-permission',[RoleAndPermissionController::class,'roleAndPemissionManagePage'])->can('role.browse');
     Route::get('/user-log',[UserLogController::class,'userLogPage']);
 });

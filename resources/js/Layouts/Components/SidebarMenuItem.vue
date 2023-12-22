@@ -76,15 +76,20 @@
             { 'max-h-[2048px]': expanded },
         ]">
             <ul>
-                <sidebar-menu-item 
-                    v-for="childMenuItem, index in menuItem.submenu" 
-                    :menu-item="childMenuItem" 
-                    :key="index"
-                    :collapsed="collapsed" 
-                    :is-submenu="true"
-                    @expand="onChildExpand"
-                >
-                </sidebar-menu-item>
+                <div
+                    v-for="childMenuItem, index in menuItem.submenu"
+                    :key="index">
+                    <sidebar-menu-item 
+                        v-if="can(childMenuItem.permission)"
+                        :menu-item="childMenuItem" 
+                        :key="index"
+                        :collapsed="collapsed" 
+                        :is-submenu="true"
+                        @expand="onChildExpand"
+                    >
+                    </sidebar-menu-item>
+
+                </div>
             </ul>
         </div>
     </li>
@@ -94,6 +99,7 @@
 import { ref, computed, onMounted } from 'vue';
 import BsIcon from '@/Components/BsIcon.vue';
 import { Link, usePage } from '@inertiajs/vue3';
+import { can } from '@/Core/Helpers/permission-check';
 
 const emit = defineEmits(['expand']);
 

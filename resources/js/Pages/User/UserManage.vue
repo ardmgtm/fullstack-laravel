@@ -54,7 +54,7 @@
                 </template>
                 <DxColumn cell-template="action" width="60" alignment="center" :allowExporting="false" :showInColumnChooser="false"/>
                 <template #action="{ data }">
-                    <el-dropdown trigger="click" placement="bottom-end">
+                    <el-dropdown trigger="click" placement="bottom-end" :disabled="!can('user.update|user.delete')">
                         <span class="el-dropdown-link">
                             <BsIcon icon="ellipsis-vertical" />
                         </span>
