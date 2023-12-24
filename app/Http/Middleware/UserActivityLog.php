@@ -47,7 +47,7 @@ class UserActivityLog
             if ($request->has('errors')) {
                 $errors = $request->get('errors');
                 $logData['errors'] = [
-                    'msg' => $errors->getMessage(),
+                    'message' => $errors->getMessage(),
                     'stack_trace' => $errors->getTrace(),
                 ];
                 Log::error(json_encode($logData));

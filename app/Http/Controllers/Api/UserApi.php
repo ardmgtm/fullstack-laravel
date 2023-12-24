@@ -26,7 +26,7 @@ class UserApi extends Controller
             DB::commit();
             return response()->json([
                 'status' => true,
-                'msg' => 'User berhasil ditambahkan',
+                'message' => 'User berhasil ditambahkan',
                 'data' => [],
             ],200);
         } catch (\Throwable $th) {
@@ -34,7 +34,7 @@ class UserApi extends Controller
             $request->merge(['errors' => $th]);
             return response()->json([
                 'status' => false,
-                'msg' => 'Gagal menambahkan User',
+                'message' => 'Gagal menambahkan User',
                 'data' => [],
             ],500);
         }
@@ -54,7 +54,7 @@ class UserApi extends Controller
             DB::commit();
             return response()->json([
                 'status' => true,
-                'msg' => 'User berhasil diubah',
+                'message' => 'User berhasil diubah',
                 'data' => [],
             ], 200);
         } catch (\Throwable $th) {
@@ -62,7 +62,7 @@ class UserApi extends Controller
             $request->merge(['errors' => $th]);
             return response()->json([
                 'status' => false,
-                'msg' => 'Gagal mengubah user',
+                'message' => 'Gagal mengubah user',
                 'data' => [],
             ], 500);
         }
@@ -73,7 +73,7 @@ class UserApi extends Controller
         if($id == $authUserId){
             return response()->json([
                 'status' => false,
-                'msg' => 'Gagal menghapus user',
+                'message' => 'Gagal menghapus user',
                 'data' => [],
             ], 401);
         }
@@ -82,7 +82,7 @@ class UserApi extends Controller
             DB::commit();
             return response()->json([
                 'status' => true,
-                'msg' => 'User berhasil dihapus',
+                'message' => 'User berhasil dihapus',
                 'data' => [],
             ], 200);
         } catch (\Throwable $th) {
@@ -90,7 +90,7 @@ class UserApi extends Controller
             $request->merge(['errors' => $th]);
             return response()->json([
                 'status' => false,
-                'msg' => 'Gagal menghapus user',
+                'message' => 'Gagal menghapus user',
                 'data' => [],
             ], 500);
         }
@@ -102,7 +102,7 @@ class UserApi extends Controller
         if($id == $authUserId){
             return response()->json([
                 'status' => false,
-                'msg' => 'Gagal mengubah user',
+                'message' => 'Gagal mengubah user',
                 'data' => [],
             ], 401);
         }
@@ -113,7 +113,7 @@ class UserApi extends Controller
             DB::commit();
             return response()->json([
                 'status' => true,
-                'msg' => 'User berhasil diubah',
+                'message' => 'User berhasil diubah',
                 'data' => [],
             ], 200);
         } catch (\Throwable $th) {
@@ -121,7 +121,7 @@ class UserApi extends Controller
             $request->merge(['errors' => $th]);
             return response()->json([
                 'status' => false,
-                'msg' => 'Gagal mengubah user',
+                'message' => 'Gagal mengubah user',
                 'data' => [],
             ], 500);
         }

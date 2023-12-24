@@ -208,7 +208,7 @@ async function addUserSubmitAction() {
                 .then((response) => {
                     var responseData = response.data;
                     ElMessage({
-                        message: responseData.msg,
+                        message: responseData.message,
                         type: 'success',
                     });
                     refreshDatagrid();
@@ -216,7 +216,7 @@ async function addUserSubmitAction() {
                 .catch((error) => {
                     var errorResponseData = error.response.data;
                     ElMessage({
-                        message: errorResponseData.msg,
+                        message: errorResponseData.message,
                         type: 'error',
                     });
                 })
@@ -244,7 +244,7 @@ async function editUserSubmitAction() {
                 .then((response) => {
                     var responseData = response.data;
                     ElMessage({
-                        message: responseData.msg,
+                        message: responseData.message,
                         type: 'success',
                     });
                     refreshDatagrid();
@@ -252,7 +252,7 @@ async function editUserSubmitAction() {
                 .catch((error) => {
                     var errorResponseData = error.response.data;
                     ElMessage({
-                        message: errorResponseData.msg,
+                        message: errorResponseData.message,
                         type: 'error',
                     });
                 })
@@ -277,7 +277,7 @@ function deleteUserAction(dataUser) {
                 .then((response) => {
                     var responseData = response.data;
                     ElMessage({
-                        message: responseData.msg,
+                        message: responseData.message,
                         type: 'success',
                     });
                     refreshDatagrid();
@@ -285,7 +285,7 @@ function deleteUserAction(dataUser) {
                 .catch((error) => {
                     var errorResponseData = error.response.data;
                     ElMessage({
-                        message: errorResponseData.msg,
+                        message: errorResponseData.message,
                         type: 'error',
                     });
                 })
@@ -304,7 +304,7 @@ function switchUserStatus(dataUser, status){
         .then((response) => {
             var responseData = response.data;
             ElMessage({
-                message: responseData.msg,
+                message: responseData.message,
                 type: 'success',
             });
             refreshDatagrid();
@@ -312,7 +312,7 @@ function switchUserStatus(dataUser, status){
         .catch((error) => {
             var errorResponseData = error.response.data;
             ElMessage({
-                message: errorResponseData.msg,
+                message: errorResponseData.message,
                 type: 'error',
             });
         })

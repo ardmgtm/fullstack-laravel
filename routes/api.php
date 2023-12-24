@@ -23,17 +23,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::controller(UserApi::class)->group(function () {
-        Route::post('/user', 'create');
-        Route::put('/user/{id}', 'update');
-        Route::delete('/user/{id}', 'delete');
-        Route::put('/user/{id}/switch-status','switchStatus');
+        Route::post('/user', 'create')->can('user.create');
+        Route::put('/user/{id}', 'update')->can('user.update');
+        Route::delete('/user/{id}', 'delete')->can('user.delete');
+        Route::put('/user/{id}/switch-status','switchStatus')->can('user.update');
     });
     Route::controller(RoleAndPermissionApi::class)->group(function () {
-        Route::post('/role', 'create');
-        Route::put('/role/switch-permission', 'switchPermission');
+        Route::post('/role', 'create')->can('role.create');
+        Route::put('/role/switch-permission', 'switchPermission')->can('role.assign_permission');
         
-        Route::put('/role/{id}', 'update');
-        Route::delete('/role/{id}', 'delete');
+        Route::put('/role/{id}', 'update')->can('role.update');
+        Route::delete('/role/{id}', 'delete')->can('role.delete');
         Route::get('/role/{id}/permissions','getRolePermission');
     });
 });

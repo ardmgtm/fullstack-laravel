@@ -20,7 +20,7 @@ class UserLogApi extends Controller
 
         return response()->json([
             'status' => true,
-            'msg' => 'Berhasil mengambil list log file',
+            'message' => 'Berhasil mengambil list log file',
             'data' => [
                 'log_file_list' => $fileList,
             ]
@@ -51,7 +51,7 @@ class UserLogApi extends Controller
 
             return response()->json([
                 'status' => true,
-                'msg' => 'Berhasil mengambil list log file',
+                'message' => 'Berhasil mengambil list log file',
                 'data' => [
                     'log_detail' => $collection,
                 ]
@@ -59,7 +59,7 @@ class UserLogApi extends Controller
         } else {
             return response()->json([
                 'status' => false,
-                'msg' => 'File log tidak ditemukan',
+                'message' => 'File log tidak ditemukan',
                 'data' => []
             ]);
         }

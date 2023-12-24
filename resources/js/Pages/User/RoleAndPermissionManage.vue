@@ -159,7 +159,7 @@ async function addUserRoleSubmitAction() {
                 .then((response) => {
                     var responseData = response.data;
                     ElMessage({
-                        message: responseData.msg,
+                        message: responseData.message,
                         type: 'success',
                     });
                     router.reload({ only: ['roles'] });
@@ -167,7 +167,7 @@ async function addUserRoleSubmitAction() {
                 .catch((error) => {
                     var errorResponseData = error.response.data;
                     ElMessage({
-                        message: errorResponseData.msg,
+                        message: errorResponseData.message,
                         type: 'error',
                     });
                 });
@@ -189,7 +189,7 @@ async function editUserRoleSubmitAction() {
                 .then((response) => {
                     var responseData = response.data;
                     ElMessage({
-                        message: responseData.msg,
+                        message: responseData.message,
                         type: 'success',
                     });
                     router.reload({ only: ['roles'] });
@@ -197,7 +197,7 @@ async function editUserRoleSubmitAction() {
                 .catch((error) => {
                     var errorResponseData = error.response.data;
                     ElMessage({
-                        message: errorResponseData.msg,
+                        message: errorResponseData.message,
                         type: 'error',
                     });
                 });
@@ -219,7 +219,7 @@ function deleteUserRoleAction(dataRole) {
                 .then((response) => {
                     var responseData = response.data;
                     ElMessage({
-                        message: responseData.msg,
+                        message: responseData.message,
                         type: 'success',
                     });
                     idSelectedRole.value = null;
@@ -228,7 +228,7 @@ function deleteUserRoleAction(dataRole) {
                 .catch((error) => {
                     var errorResponseData = error.response.data;
                     ElMessage({
-                        message: errorResponseData.msg,
+                        message: errorResponseData.message,
                         type: 'error',
                     });
                 });
@@ -262,7 +262,7 @@ function selectingRole(dataRole){
         .catch((error) => {
             var errorResponseData = error.response.data;
             ElMessage({
-                message: errorResponseData.msg,
+                message: errorResponseData.message,
                 type: 'error',
             });
         })
@@ -292,7 +292,7 @@ function onSwitchChange(idRole, permissionData, newValue){
                 var responseData = response.data;
                 totalPermissionGranted.value = newValue == 0 ? totalPermissionGranted.value - 1 : totalPermissionGranted.value + 1;
                 ElMessage({
-                    message: responseData.msg,
+                    message: responseData.message,
                     grouping: true,
                     type: 'success',
                 });
@@ -302,7 +302,7 @@ function onSwitchChange(idRole, permissionData, newValue){
                 var errorResponseData = error.response.data;
                 permissionData.role_has_permission = newValue == 0 ? 1 : 0;
                 ElMessage({
-                    message: errorResponseData.msg,
+                    message: errorResponseData.message,
                     grouping: true,
                     type: 'error',
                 });

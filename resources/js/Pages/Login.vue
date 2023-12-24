@@ -58,7 +58,7 @@ const login = async () => {
                 },
                 onError: (errors) =>{
                     ElMessage({
-                        message: errors.msg,
+                        message: errors.message,
                         type: 'error',
                     });
                 }

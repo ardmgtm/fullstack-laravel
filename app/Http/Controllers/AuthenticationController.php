@@ -39,7 +39,7 @@ class AuthenticationController extends Controller
             return redirect()->intended(RouteServiceProvider::HOME);
         } else {
             return redirect()->back()->withErrors([
-                'msg' => 'Incorrect Username or Password !'
+                'message' => 'Incorrect Username or Password !'
             ]);
         }
     }

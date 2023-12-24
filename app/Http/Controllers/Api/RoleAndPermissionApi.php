@@ -21,7 +21,7 @@ class RoleAndPermissionApi extends Controller
             DB::commit();
             return response()->json([
                 'status' => true,
-                'msg' => 'Role berhasil ditambahkan',
+                'message' => 'Role berhasil ditambahkan',
                 'data' => [],
             ],200);
         } catch (\Throwable $th) {
@@ -29,7 +29,7 @@ class RoleAndPermissionApi extends Controller
             $request->merge(['errors' => $th]);
             return response()->json([
                 'status' => false,
-                'msg' => 'Gagal menambahkan Role',
+                'message' => 'Gagal menambahkan Role',
                 'data' => [],
             ],500);
         }
@@ -44,7 +44,7 @@ class RoleAndPermissionApi extends Controller
             DB::commit();
             return response()->json([
                 'status' => true,
-                'msg' => 'Role berhasil diubah',
+                'message' => 'Role berhasil diubah',
                 'data' => [],
             ], 200);
         } catch (\Throwable $th) {
@@ -52,7 +52,7 @@ class RoleAndPermissionApi extends Controller
             $request->merge(['errors' => $th]);
             return response()->json([
                 'status' => false,
-                'msg' => 'Gagal mengubah role',
+                'message' => 'Gagal mengubah role',
                 'data' => [],
             ], 500);
         }
@@ -65,7 +65,7 @@ class RoleAndPermissionApi extends Controller
             DB::commit();
             return response()->json([
                 'status' => true,
-                'msg' => 'Role berhasil dihapus',
+                'message' => 'Role berhasil dihapus',
                 'data' => [],
             ], 200);
         } catch (\Throwable $th) {
@@ -73,7 +73,7 @@ class RoleAndPermissionApi extends Controller
             $request->merge(['errors' => $th]);
             return response()->json([
                 'status' => false,
-                'msg' => 'Gagal menghapus role',
+                'message' => 'Gagal menghapus role',
                 'data' => [],
             ], 500);
         }
@@ -96,7 +96,7 @@ class RoleAndPermissionApi extends Controller
     
             return response()->json([
                 'status' => true,
-                'msg' => 'Berhasil mengambil data permission',
+                'message' => 'Berhasil mengambil data permission',
                 'data' => [
                     'permissions' => $permissionsGrouped,
                     'total_assigned_permission' => $permissions->where('role_has_permission', 1)->count(),
@@ -106,7 +106,7 @@ class RoleAndPermissionApi extends Controller
             $request->merge(['errors' => $th]);
             return response()->json([
                 'status' => false,
-                'msg' => 'Gagal mengambil data permission',
+                'message' => 'Gagal mengambil data permission',
                 'data' => [],
             ], 500);
         }
@@ -125,7 +125,7 @@ class RoleAndPermissionApi extends Controller
             DB::commit();
             return response()->json([
                 'status' => true,
-                'msg' => 'Role permission berhasil diubah',
+                'message' => 'Role permission berhasil diubah',
                 'data' => [],
             ], 200);
         } catch (\Throwable $th) {
@@ -133,7 +133,7 @@ class RoleAndPermissionApi extends Controller
             $request->merge(['errors' => $th]);
             return response()->json([
                 'status' => false,
-                'msg' => 'Gagal mengubah role permission',
+                'message' => 'Gagal mengubah role permission',
                 'data' => $th,
             ], 500);
         }
